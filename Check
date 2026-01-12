@@ -1,0 +1,7 @@
+intOne = input("- or + >")
+intTwo = input("- or + >")
+bothNeg = input("true or false >") 
+if intOne == "-" or intTwo == "-" and bothNeg == "false" or intOne == "-" and intTwo == "-" and bothNeg == "true":
+    print("True")
+else:
+    print("False") 
