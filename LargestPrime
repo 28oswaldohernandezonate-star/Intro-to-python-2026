@@ -1,16 +1,34 @@
-def isPrime(p):
-  for i in range(2, p):
-    if p % i == 0: 
-      return False 
-  return True
-
 digit = input ()
 String = ("")
 for i in range (int(digit)):
     String += "9"
 String = int(String)
+ 
+def findingL(String):
+ lastDigit = String % 10
+ while lastDigit != 7:
+  lastDigit = lastDigit - 1
 
-while not isPrime(String):
-    String = String - 1
-else: 
-   print (str(String) + " is the largest prime")
+ String= (String // 10 ) * 10+ lastDigit
+ return String 
+
+String = findingL(String)
+
+def isPrime(p):
+  for i in range(2, p):
+    if p % i == 0: 
+      return False 
+  return True
+  
+String = findingL(String)
+
+if isPrime(String):
+  print (str(String) + " is the largest prime")
+
+elif isPrime((String// 10) * 10 + 3): 
+  String = (String// 10) * 10 + 3
+  print (str(String) + " is the largest prime")
+
+elif isPrime((String// 10) * 10 + 1): 
+  String = (String// 10) * 10 + 1
+  print (str(String) + " is the largest prime")
