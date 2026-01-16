@@ -1,0 +1,16 @@
+def isPrime(p):
+  for i in range(2, p):
+    if p % i == 0: 
+      return False 
+  return True
+
+digit = input ()
+String = ("")
+for i in range (int(digit)):
+    String += "9"
+String = int(String)
+
+while not isPrime(String):
+    String = String - 1
+else: 
+   print (str(String) + " is the largest prime")
