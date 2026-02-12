@@ -53,11 +53,21 @@ def bedroom():
     if choice == "living room":
         livingRoom()
     elif choice == "search for items":
-        slowText("You searched the room and found a ")
+        if search(backpack, "shovel"):
+            slowText("You searched the bedroom and found nothing...")
+            time.sleep(2)
+            bedroom()
+        else:
+            slowText("You searched the bedroom and found a flashlight, do you want to pick it up?")
+            choice = input().strip().lower()
+            if choice == "yes":
+                backpack.append("flashlight")
+                time.sleep(2)
+                bedroom()
     else:
         print("Invalid choice. Please try again.")
         time.sleep(2)
-        kitchen()
+        bedroom()
 
 def kitchen(): 
     global inv
@@ -71,7 +81,17 @@ def kitchen():
     elif choice == "garden":
         garden()
     elif choice == "search for items":
-        slowText("You searched the room and found a ")
+        if search(backpack, "paper clip"):
+            slowText("You searched the kitchen and found nothing...")
+            time.sleep(1)
+            kitchen()
+        else:
+            slowText("You searched a junk draw in the kitchen and found a paper clip, do you want to pick it up?")
+            choice = input().strip().lower()
+            if choice == "yes":
+                backpack.append("paper clip")
+                slowText("You picked up a paper clip")
+                kitchen()
     else:
         print("Invalid choice. Please try again.")
         time.sleep(2)
@@ -85,20 +105,20 @@ def garden():
     slowText("What would you like to do?")
     choice = input().strip().lower()
     if choice == "kitchen":
-        bedroom()
+        kitchen()
     elif choice == "living room":
         livingRoom()
     elif choice == "search for items":
         if search(backpack, "shovel"):
             slowText("You searched the garden and found nothing...")
-            time.sleep(2)
+            time.sleep(1)
             garden()
         else:
             slowText("You searched the garden and found a shovel, do you want to pick it up?")
             choice = input().strip().lower()
             if choice == "yes":
                 backpack.append("shovel")
-                time.sleep(2)
+                slowText("You picked up a shovel")
                 garden()
     else:
         print("Invalid choice. Please try again.")
