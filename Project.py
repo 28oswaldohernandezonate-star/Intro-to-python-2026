@@ -36,7 +36,17 @@ def livingRoom():
     elif choice == "garden":
         garden()
     elif choice == "search for items":
-        slowText("You searched the room and found a ")
+         if search(backpack, "leg splint"):
+            slowText("You searched the bedroom and found nothing...")
+            time.sleep(2)
+            livingRoom()
+         else:
+            slowText("You searched the living and found a leg splint, do you want to pick it up?")
+            choice = input().strip().lower()
+            if choice == "yes":
+                backpack.append("leg splint")
+                time.sleep(2)
+                livingRoom()
     else:
         print("Invalid choice. Please try again.")
         time.sleep(2)
@@ -47,7 +57,7 @@ def bedroom():
     global inv
     os.system('cls' if os.name == 'nt' else 'clear')
     print("backpack: {}".format(backpack))
-    slowText("You are in the bedroom. There is a door to the living room. You can also search for items")
+    slowText("You are in the bedroom. There is a door to the living room and a window outside. You can also search for items")
     slowText("What would you like to do?")
     choice = input().strip().lower()
     if choice == "living room":
@@ -73,13 +83,15 @@ def kitchen():
     global inv
     os.system('cls' if os.name == 'nt' else 'clear')
     print("backpack: {}".format(backpack))
-    slowText("You are in the kitchen. There are doors to the living room and garden. You can also search for items")
+    slowText("You are in the kitchen. There are doors to the living room and garden as well as a window outside. You can also search for items")
     slowText("What would you like to do?")
     choice = input().strip().lower()
     if choice == "living room":
         bedroom()
     elif choice == "garden":
         garden()
+    elif choice == "window":
+        window()
     elif choice == "search for items":
         if search(backpack, "paper clip"):
             slowText("You searched the kitchen and found nothing...")
@@ -131,6 +143,26 @@ def search(pack, item):
         if pack[i] == item:
             found = True
     return found 
+
+def window ():
+    slowText("You opened the window ") 
+    if search(backpack, "paper clip")== True:
+        slowText("You used the paper clip to pick a lock on the window, and now its open.")
+        slowText("A barbed fence surrounds the house.")
+        if search(backpack, "shovel") == True:
+            slowText("You used the shovel to dig a hole you can crawl through")
+            slowText("Congratulations you have escaped!")
+            time.sleep(5)
+            start()
+        else:
+          slowText("You couldnt find a way past the fence and went back in.")
+          time.sleep(2)
+          kitchen()
+    else:
+     slowText("You dont have the tools to open the window")
+     time.sleep(2)
+     kitchen()
+
 
 backpack = []
 playerName = ""
